@@ -34,6 +34,14 @@ const RequestNode = ({ data, isConnectable }) => {
 
   const key = getRandomInt(9999);
 
+  const typeChange = (event) => {
+    data.addParametersElement('input', 'type', event.target.value);
+  };
+
+  const bodyChange = (event) => {
+    data.addParametersElement('input', 'body', event.target.value);
+  };
+
   return (
     <div className="text-updater-node">
       <div>
@@ -64,18 +72,18 @@ const RequestNode = ({ data, isConnectable }) => {
               borderRadius: '5px',
               marginBottom: '10px',
             }}
+            onChange={typeChange}
           >
-            <option value="volvo">JSON</option>
-            <option value="saab">RAW</option>
-            <option value="mercedes">XML</option>
-            <option value="audi">CSV</option>
+            <option value="JSON">JSON</option>
+            <option value="RAW">RAW</option>
+            <option value="XML">XML</option>
+            <option value="CSV">CSV</option>
           </select>
           <Text style={{ color: '#002855' }}>Body</Text>
           <Input
             key={key + 1}
-            // onChange={onChange}
+            onChange={bodyChange}
             style={{ width: '100%' }}
-            onChange={data.onChange}
             placeholder="Body"
           />
         </div>

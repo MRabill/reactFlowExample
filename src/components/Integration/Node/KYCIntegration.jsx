@@ -30,6 +30,11 @@ const KYCIntegration = ({ data, isConnectable }) => {
 
   const key = getRandomInt(9999);
 
+  const criteriaChange = (criteria) => {
+    data.addIntegrationElement('KYCIntegration', 'criteria', criteria);
+    // console.log(event);
+  };
+
   return (
     <div className="text-updater-node">
       <Handle
@@ -77,7 +82,7 @@ const KYCIntegration = ({ data, isConnectable }) => {
             }}
             placeholder="Search criteria"
             // defaultValue={['a10', 'c12']}
-            onChange={handleChange}
+            onChange={criteriaChange}
             options={options}
           />
           <Text style={{ color: '#002855' }}>Models</Text>

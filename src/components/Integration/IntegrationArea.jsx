@@ -69,6 +69,22 @@ function IntegrationArea() {
   // const [config, setConfig] = useState({});
 
   let config = { Integration: [] };
+  let parameters = { input: {}, integration: {}, output: {} };
+
+  function addParametersElement(nodeType, key, value) {
+    parameters[`${nodeType}`][key] = value;
+    console.log(parameters);
+  }
+  function addIntegrationElement(integrationType, key, value) {
+    // parameters['integration'][`${integrationType}`] = integrationType;
+    if (parameters['integration'][`${integrationType}`] == undefined) {
+      const newIntegration = {};
+      parameters['integration'][`${integrationType}`] = newIntegration;
+    }
+
+    parameters['integration'][`${integrationType}`][key] = value;
+    console.log(parameters);
+  }
 
   function addConfigElement(key, value) {
     config[key] = value;
@@ -140,7 +156,7 @@ function IntegrationArea() {
 
   const publish = () => {
     setLoading(true);
-    publishMutation.mutate(config);
+    // publishMutation.mutate(config);
   };
 
   const onDrop = useCallback(
@@ -165,7 +181,10 @@ function IntegrationArea() {
         id: getId(),
         type,
         position,
-        data: { label: `xasdad node`, onChange: onChange },
+        data: {
+          addParametersElement: addParametersElement,
+          addIntegrationElement: addIntegrationElement,
+        },
       };
 
       let inputConfig = {};

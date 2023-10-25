@@ -13,12 +13,11 @@ const queryClient = new QueryClient();
 // const SpringModal = lazy(() => import('./pages/SpringModal'));
 const Overview = lazy(() => import('./pages/Overview'));
 const Integration = lazy(() => import('./pages/Integration'));
-const CustomNodeFlow = lazy(() => import('./pages/CustomNodeFlow'));
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <CustomNodeFlow />,
+    element: <Integration />,
   },
   {
     path: '/Integration',
