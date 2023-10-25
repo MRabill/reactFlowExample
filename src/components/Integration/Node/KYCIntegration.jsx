@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Handle, Position } from 'reactflow';
 import { Typography, Input, Select, Space, InputNumber } from 'antd';
 
@@ -24,8 +24,12 @@ function getRandomInt(max) {
 }
 
 const KYCIntegration = ({ data, isConnectable }) => {
-  const onChange = useCallback((evt) => {
-    console.log(evt.target.value);
+  // const onChange = useCallback((evt) => {
+  //   console.log(evt.target.value);
+  // }, []);
+
+  useEffect(() => {
+    data.addIntegrationElement('KYCIntegration', 'criteria', []);
   }, []);
 
   const key = getRandomInt(9999);
@@ -112,7 +116,7 @@ const KYCIntegration = ({ data, isConnectable }) => {
             min="0"
             max="1"
             step="0.1"
-            onChange={onChange}
+            // onChange={onChange}
             // stringMode
           />
           <Text style={{ color: '#002855' }}>Medium</Text>
@@ -125,7 +129,7 @@ const KYCIntegration = ({ data, isConnectable }) => {
             min="0"
             max="1"
             step="0.1"
-            onChange={onChange}
+            // onChange={onChange}
             // stringMode
           />
           <Text style={{ color: '#002855' }}>High</Text>
@@ -138,7 +142,7 @@ const KYCIntegration = ({ data, isConnectable }) => {
             min="0"
             max="1"
             step="0.1"
-            onChange={onChange}
+            // onChange={onChange}
             // stringMode
           />
           {/* <Input

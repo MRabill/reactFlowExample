@@ -49,7 +49,8 @@ const initialNodes = [
   //     data: { value: 123 },
   //   },
 ];
-// we define the nodeTypes outside of the component to prevent re-renderings
+const userId = '123';
+
 const nodeTypes = {
   RequestNode: RequestNode,
   KYCIntegration: KYCIntegration,
@@ -68,32 +69,41 @@ function IntegrationArea() {
   const [loading, setLoading] = useState([]);
   // const [config, setConfig] = useState({});
 
-  let config = { Integration: [] };
-  let parameters = { input: {}, integration: {}, output: {} };
+  const endpoint = `https://mrindustries/publish/${apiKey}`;
+
+  let nodesList = { Integration: [] };
+  let config = {
+    apiKey: apiKey,
+    userId: userId,
+    endpoint: endpoint,
+    input: {},
+    integration: {},
+    output: {},
+  };
+  // console.log(config);
 
   function addParametersElement(nodeType, key, value) {
-    parameters[`${nodeType}`][key] = value;
-    console.log(parameters);
+    config[`${nodeType}`][key] = value;
+    console.log(config);
   }
   function addIntegrationElement(integrationType, key, value) {
-    // parameters['integration'][`${integrationType}`] = integrationType;
-    if (parameters['integration'][`${integrationType}`] == undefined) {
+    if (config['integration'][`${integrationType}`] == undefined) {
       const newIntegration = {};
-      parameters['integration'][`${integrationType}`] = newIntegration;
+      config['integration'][`${integrationType}`] = newIntegration;
     }
 
-    parameters['integration'][`${integrationType}`][key] = value;
-    console.log(parameters);
+    config['integration'][`${integrationType}`][key] = value;
+    console.log(config);
   }
 
   function addConfigElement(key, value) {
-    config[key] = value;
-    console.log(config);
+    nodesList[key] = value;
+    console.log(nodesList);
   }
 
   function addConfigIntegration(value) {
-    config.Integration.push(value);
-    console.log(config);
+    nodesList.Integration.push(value);
+    console.log(nodesList);
   }
 
   const openNotificationWithIcon = (type) => {
@@ -178,7 +188,7 @@ function IntegrationArea() {
         y: event.clientY - reactFlowBounds.top,
       });
       const newNode = {
-        id: getId(),
+        id: type,
         type,
         position,
         data: {
@@ -289,11 +299,11 @@ function IntegrationArea() {
                     style={{ color: '#002855' }}
                     copyable={{
                       tooltips: false,
-                      text: `https://mrindustries/publish/${apiKey}`,
+                      text: endpoint,
                     }}
                   >
                     <b>Endpoint: </b>
-                    {`https://mrindustries/publish/${apiKey}`}
+                    {endpoint}
                   </Text>
                 </div>
 

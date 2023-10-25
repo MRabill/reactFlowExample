@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { Handle, Position } from 'reactflow';
 import { Typography, Input, Select, Checkbox, Row, Col } from 'antd';
 
@@ -12,6 +12,11 @@ const ActionNode = ({ data, isConnectable }) => {
   const [channel, setChannel] = useState('Email');
   const onChange = useCallback((evt) => {
     console.log(evt.target.value);
+  }, []);
+
+  useEffect(() => {
+    // data.addParametersElement('input', 'type', 'JSON');
+    // data.addParametersElement('input', 'body', '');
   }, []);
 
   const key = getRandomInt(9999);

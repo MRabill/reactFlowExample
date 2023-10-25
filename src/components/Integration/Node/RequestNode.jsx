@@ -1,6 +1,6 @@
-import { useCallback } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import { Handle, Position } from 'reactflow';
-import { Typography, Input, Select, Dropdown, Space } from 'antd';
+import { Typography, Input, Select, Dropdown, Space, Form } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 
 const { Text } = Typography;
@@ -9,27 +9,10 @@ function getRandomInt(max) {
   return Math.floor(Math.random() * max);
 }
 
-const items = [
-  {
-    label: <a href="https://www.antgroup.com">1st menu item</a>,
-    key: '0',
-  },
-  {
-    label: <a href="https://www.aliyun.com">2nd menu item</a>,
-    key: '1',
-  },
-  {
-    type: 'divider',
-  },
-  {
-    label: '3rd menu item',
-    key: '3',
-  },
-];
-
 const RequestNode = ({ data, isConnectable }) => {
-  const onChange = useCallback((evt) => {
-    console.log(evt.target.value);
+  useEffect(() => {
+    data.addParametersElement('input', 'type', 'JSON');
+    data.addParametersElement('input', 'body', '');
   }, []);
 
   const key = getRandomInt(9999);
@@ -80,12 +63,16 @@ const RequestNode = ({ data, isConnectable }) => {
             <option value="CSV">CSV</option>
           </select>
           <Text style={{ color: '#002855' }}>Body</Text>
-          <Input
-            key={key + 1}
-            onChange={bodyChange}
-            style={{ width: '100%' }}
-            placeholder="Body"
-          />
+          <Form name="basic" autoComplete="off">
+            <Form.Item name="body">
+              <Input
+                key={key + 1}
+                onChange={bodyChange}
+                style={{ width: '100%' }}
+                placeholder="Body"
+              />
+            </Form.Item>
+          </Form>
         </div>
       </div>
       <Handle
